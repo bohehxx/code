@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <script>
+        var number = 5;
+        var obj = {
+            number: 3,
+            fn1: (function () {
+                var number;
+                this.number *= 2;
+                number = number * 2;
+                number = 3;
+                return function () {
+                    var num2 = this.number;
+                    this.number2 *= 2;
+                    console.log(num2);
+                    number *= 3;
+                    console.log(number);
+                }
+            })()
+        }
+        var fn1 = obj.fn1;
+        console.log(fn1,'fn1')
+        // fn1()
+        fn1.call(null);
+        obj.fn1();
+        // console.log(window.number);;
+    </script>
+</body>
+
+
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <script>
+        function wait(message){
+            setTimeout(function timer(message){
+                console.log(message)
+            },1000)
+        }
+        wait( "Hello, closure!" );
+        // 将一个内部函数（名为 timer）传递给 setTimeout(..)。timer 具有涵盖 wait(..) 作用域
+        // 的闭包，因此还保有对变量 message 的引用
+    </script>
+</body>
+
+</html>
