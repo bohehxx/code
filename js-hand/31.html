@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <script>
+        Function.prototype.apply2 = function (context, arr) {
+            var context = context || window;
+            context.fn = this;
+
+            var result;
+            if (!arr) {
+                result = context.fn();
+            } else {
+                var args = [];
+                for (var i = 0, len = arr.length; i < len; i++) {
+                    args.push('arr[' + i + ']');
+                }
+                result = eval('context.fn(' + args + ')')
+            }
+
+            delete context.fn
+            return result;
+        }
+
+        var obj = { name: 'Amy' }
+        function fn() {
+            console.log(this)
+        }
+        fn()
+        fn.apply2(obj)
+        var obj2 = {
+            name: '小张',
+            objAge: this.age,
+            myFun: function (fm,t) {
+                console.log(fm, t,'fm')
+                console.log(this.name + '年龄' + this.age + '来自' + fm + '去往' + t)
+            }
+        }
+        var db = {
+            name: '德玛',
+            age: 99
+        }
+        obj2.myFun.apply2(db, ['成都', '上海'])
+    </script>
+</body>
+
+</html>

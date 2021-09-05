@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <script>
+        let arr = [
+            { id: 1, name: '部门1', pid: 0 },
+            { id: 2, name: '部门2', pid: 1 },
+            { id: 3, name: '部门3', pid: 1 },
+            { id: 4, name: '部门4', pid: 3 },
+            { id: 5, name: '部门5', pid: 4 },
+        ]
+        function arrToTree(arr, pid) {
+            let arr2 = []
+            let arr3 = []
+            arr.forEach(item => {
+                if (item.pid === pid) {
+                    arr2.push(item)
+
+                } else {
+                    arr3.push(item)
+                }
+            })
+            for (let item of arr2) {
+                let child = arrToTree(arr, item.id)
+                console.log(child, 'child')
+                if (child.length > 0) {
+                    item.children = child
+                }
+
+            }
+            return arr2
+        }
+        let a = arrToTree(arr, 0)
+        console.log(a, 'aaa')
+        function arrayToTree(list, pid = 0) {
+            return list.filter(item => item.pid === pid).map(item => ({
+                ...item,
+                children: arrayToTree(list, item.id),
+            }));
+        }
+        let b = arrayToTree(arr, 0)
+        console.log(b, 'bbb')
+
+
+
+    </script>
+</body>
+
+
+</html>

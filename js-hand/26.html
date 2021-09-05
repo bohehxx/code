@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <script>
+        Array.prototype.map2 = function(callback,thisArg){
+            if(this === null){
+                new TypeError('this is null or undefined')
+            }
+            if(typeof callback !== 'function'){
+                new TypeError(callback+'is not a function')
+            }
+            let o = Object(this)
+            let length = o.length >>>0
+            let k = 0,res =[]
+            while(k<len){
+                if(k in o){
+                    res[k] = callback.call(thisArg,o[k],k,o)
+                }
+                k++
+            }
+            return res
+        }
+    </script>
+</body>
+
+</html>

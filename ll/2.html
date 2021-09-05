@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <script>
+        function mySetInterval(fn, millisec, count) {
+            function interval() {
+                if (typeof count ==='undefined'|| count-- > 0) {
+                    setTimeout(interval, millisec);
+                    try {
+                        fn()
+                    } catch (e) {
+                        count = 0;
+                        throw e.toString();
+                    }
+                }
+            }
+            setTimeout(interval, millisec)
+        }
+
+
+
+    </script>
+</body>
+
+
+</html>

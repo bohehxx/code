@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <script>
+        function Animal(name) {
+            this.name = name
+            this.colors = ['black', 'white']
+        }
+        Animal.prototype.getName = function () {
+            return this.name
+        }
+        function Dog(name, age) {
+            Animal.call(this, name)
+            this.age = age
+        }
+        Dog.prototype = new Animal()
+        Dog.constructor = Dog
+        let dog1 = new Dog('奶昔', 2)
+        dog1.colors.push('brown')
+        let dog2 = new Dog('哈赤', 1)
+        console.log(dog2)
+        // 组合继承已经相对完善了，但还是存在问题，它的问题就是
+        // 调用了 2 次父类构造函数，第一次是在 new Animal()，第二次是在 Animal.call() 这里。
+    </script>
+</body>
+
+</html>
