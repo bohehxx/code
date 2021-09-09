@@ -7,13 +7,13 @@
 
 <body>
     <script>
-      function unique(arr){
-          var res = arr.filter(function(item,index,array){
-              return array.indexOf(item) === index
-          })
-          return res
+      function flatten(arr){
+          while(arr.some(item=>Array.isArray(item))){
+              arr = [].concat(...arr)
+          }
+          return arr
       }
-      var unique = arr=>[...new Set(arr)]
+      
     </script>
 </body>
 

@@ -7,18 +7,21 @@
 
 <body>
     <script>
-        function throttle(func, wait) {
-            var context, args;
-            var previous = 0;
-            return function () {
-                var now = +new Date();
-                context = this;
-                args = arguments;
-                if (now - previous > wait) {
-                    func.apply(context, args);
-                    previous = now;
-                }
-            }
+        const getJson = ()=>{
+           return new Promise((resove,reject)=>{
+               const xhr = XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Mscrosoft.XMLHttp')
+               xhr.open('GET',url,false)
+               xhr.setRequestHeader('Accept','application/json')
+               xhr.onreadstatechange = function(){
+                   if(xhr.readyState !==4)return 
+                   if(xhr.status ===200 || xhr.status ===304){
+                       resolve(xhr.responseText)
+                   }else{
+                       reject(new Error(xhr.responseText))
+                   }
+               }
+               xhr.send()
+           })
         }
     </script>
 </body>

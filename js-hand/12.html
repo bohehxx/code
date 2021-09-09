@@ -7,18 +7,28 @@
 
 <body>
     <script>
-     function deepClone(obj){
-      var newObj = obj instanceof Array?[]:{}
-      for(var key in obj){
-          if(obj.hasOwnProperty(key)){
-              newObj[key] = typeof obj[key] ==='object'?deepClone(obj[key]):obj[key]
-          }
-      }
-      return newObj
+     function parseParam(url){
+         const paramsStr = /.+\?(.+)$/.exec(url)[1]// 将 ? 后面的字符串取出来
+         const paramsArr = paramsStr.split('&')// 将字符串以 & 分割后存到数组中
+         let paramsObj = {}
+         paramsArr.forEach(param=>{
+             if(/=/.test(param)){
+                 let [key,val] = param.split('=')
+                 val = decodeURIComponent(val)
+                 val = /^\d+$/.test(val)?parseFloat(val):val
+                 if(paramsObj.hasOwnProperty(key)){
+                    paramsObj[key] = [].concat(paramsObj[key],val)
+                 }else{
+                    paramsObj[key] = val
+                 }
+             }else{
+                 paramsObj[param] = true
+             }
+         })
+         return paramsObj
      }
-     let d = deepClone({'a':{'b':'c'}})
-     console.log(d)
-      
+     let a = parseParam('https://juejin.cn/post?a=1&a=2&b=1')
+     console.log(a)
     </script>
 </body>
 

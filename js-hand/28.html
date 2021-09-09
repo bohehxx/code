@@ -7,29 +7,14 @@
 
 <body>
     <script>
-        Array.prototype.some2 = function(callback,thisArg){
-            console.log(callback,thisArg,'callback,thisArg')
-            if(this === null){
-                new TypeError('this is null or undefined')
+        Function.prototype.bind1 = function () {
+            const args = Array.prototype.slice.call(arguments)
+            const t = args.shift()
+            const self = this
+            return function () {
+                self.apply(t, args)
             }
-            if(typeof callback !== 'function'){
-                new TypeError(callback+'is not a function')
-            }
-            let o = Object(this)
-            let length = o.length >>>0
-            let k = 0
-            while(k<length){
-                if(k in o){
-                    if(callback.call(thisArg,o[k],k,o)){
-                        return true
-                    }
-                }
-                k++
-            }
-            return false
         }
-        let a= [0,1,2].some2(item=>item)
-        console.log(a,'a')
     </script>
 </body>
 

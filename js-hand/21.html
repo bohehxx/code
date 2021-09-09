@@ -7,18 +7,23 @@
 
 <body>
     <script>
-        function add(a,b,c){
-          return a+b+c
-        }
-        add(1,2,3)
-        let addCurry = curry(add)
-        addCurry(1)(2)(3)
-        function curry(){
-            let judge = (...args)=>{
-                if(args.length === fn.length)return fn(...args)
-                return (...args)=>judge(...args,...args)
+        Array.prototype.forEach2 = function(callback,thisArg){
+            if(this === null){
+                new TypeError('this is null or undefined')
             }
-            return judge
+            if(typeof callback !== 'function'){
+                new TypeError(callback+'is not a function')
+            }
+            let o = Object(this)
+            let length = o.length >>>0
+            let k = 0
+            while(k<len){
+                if(k in o){
+                    callback.call(thisArg,o[k],k,o)
+                }
+                k++
+            }
+            
         }
     </script>
 </body>

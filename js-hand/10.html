@@ -7,13 +7,18 @@
 
 <body>
     <script>
-      function unique(arr){
-          var res = arr.filter(function(item,index,array){
-              return array.indexOf(item) === index
-          })
-          return res
+     function deepClone(obj){
+      var newObj = obj instanceof Array?[]:{}
+      for(var key in obj){
+          if(obj.hasOwnProperty(key)){
+              newObj[key] = typeof obj[key] ==='object'?deepClone(obj[key]):obj[key]
+          }
       }
-      var unique = arr=>[...new Set(arr)]
+      return newObj
+     }
+     let d = deepClone({'a':{'b':'c'}})
+     console.log(d)
+      
     </script>
 </body>
 

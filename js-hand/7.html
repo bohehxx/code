@@ -7,19 +7,13 @@
 
 <body>
     <script>
-        function Animal(name) {
-            this.name = name
-            this.colors = ['black', 'white']
-        }
-        Animal.prototype.getName = function () {
-            return this.name
-        }
-        function Dog(name, age) {
-            Animal.call(this, name)
-            this.age = age
-        }
-        Dog.prototype = Object.create(Animal.prototype)
-        Dog.constructor = Dog
+      function unique(arr){
+          var res = arr.filter(function(item,index,array){
+              return array.indexOf(item) === index
+          })
+          return res
+      }
+      var unique = arr=>[...new Set(arr)]
     </script>
 </body>
 

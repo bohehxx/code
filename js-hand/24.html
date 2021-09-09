@@ -7,22 +7,29 @@
 
 <body>
     <script>
-        const getJson = ()=>{
-           return new Promise((resove,reject)=>{
-               const xhr = XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Mscrosoft.XMLHttp')
-               xhr.open('GET',url,false)
-               xhr.setRequestHeader('Accept','application/json')
-               xhr.onreadstatechange = function(){
-                   if(xhr.readyState !==4)return 
-                   if(xhr.status ===200 || xhr.status ===304){
-                       resolve(xhr.responseText)
-                   }else{
-                       reject(new Error(xhr.responseText))
-                   }
-               }
-               xhr.send()
-           })
+        Array.prototype.some2 = function(callback,thisArg){
+            console.log(callback,thisArg,'callback,thisArg')
+            if(this === null){
+                new TypeError('this is null or undefined')
+            }
+            if(typeof callback !== 'function'){
+                new TypeError(callback+'is not a function')
+            }
+            let o = Object(this)
+            let length = o.length >>>0
+            let k = 0
+            while(k<length){
+                if(k in o){
+                    if(callback.call(thisArg,o[k],k,o)){
+                        return true
+                    }
+                }
+                k++
+            }
+            return false
         }
+        let a= [0,1,2].some2(item=>item)
+        console.log(a,'a')
     </script>
 </body>
 
