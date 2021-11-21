@@ -20,6 +20,13 @@
         }
         let p = objectFactory(person, '布兰', 12)
         console.log(p)
+        function objectFactory(){
+            var obj = new Object()
+            var Constructor = [].shift.call(arguments)
+            obj.__proto__ = Constructor.prototype
+            var ret = Constructor.apply(obj,arguments)
+            return typeof ret === 'object'?ret || obj:obj
+        }
     </script>
 </body>
 

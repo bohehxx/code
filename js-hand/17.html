@@ -12,11 +12,12 @@
         }
         add(1,2,3)
         let addCurry = curry(add)
-        addCurry(1)(2)(3)
-        function curry(){
+        let b = addCurry(1)(2)(3)
+        console.log(b,'bbbb')
+        function curry(fn){
             let judge = (...args)=>{
                 if(args.length === fn.length)return fn(...args)
-                return (...args)=>judge(...args,...args)
+                return (...arg)=>judge(...args,...arg)
             }
             return judge
         }
